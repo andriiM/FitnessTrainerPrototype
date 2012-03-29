@@ -2,8 +2,8 @@
 //  TrainingDetail_VC.m
 //  FitnessTrainer
 //
-//  Created by _ andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 27.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "TrainingDetail_VC.h"
@@ -27,7 +27,7 @@
 #pragma mark - IBActions
 
 -(void)onSkip:(id)sender{
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -87,6 +87,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

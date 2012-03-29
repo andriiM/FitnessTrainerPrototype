@@ -2,13 +2,14 @@
 //  Training_VC.m
 //  FitnessTrainer
 //
-//  Created by _ andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 27.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Training_VC.h"
 #import "TrainingDetail_VC.h"
 #import "Workout_VC.h"
+#import "AddWorkout_VC.h"
 
 @implementation Training_VC
 
@@ -42,12 +43,23 @@
 
 #pragma mark - Table view data source
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(editingStyle==UITableViewCellEditingStyleInsert){
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+        AddWorkout_VC *vc = [[AddWorkout_VC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section==1){
+        return UITableViewCellEditingStyleInsert;
+    }
     return UITableViewCellEditingStyleNone;
 }
 
@@ -86,7 +98,6 @@
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.imageView.image = [UIImage imageNamed:@"Add Icon (green).png"];
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         }
         
@@ -122,7 +133,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(isSwipe)
+        return;
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     
     Workout_VC *vc = [[Workout_VC alloc] init];
@@ -137,9 +152,13 @@
     [self.navigationController pushViewController:vc animated:YES];
     
     [cell setNormalContent];
+    
+    isSwipe = FALSE;
 }
 
 -(void)swipeBegin:(SwipeCell *)cell{
+    isSwipe = TRUE;
+    
     if(table.isEditing)
         return;
     [cell moveCellContent];

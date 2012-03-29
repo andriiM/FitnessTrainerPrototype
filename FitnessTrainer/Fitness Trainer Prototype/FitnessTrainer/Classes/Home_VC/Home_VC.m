@@ -2,13 +2,14 @@
 //  Home_VC.m
 //  FitnessTrainer
 //
-//  Created by _ andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 27.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Home_VC.h"
 #import "TrainerCell.h"
 #import "Workouts_VC.h"
+#import "YourGoals_VC.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation Home_VC
@@ -22,8 +23,8 @@
 }
 
 -(void)addLeftButtonToNavigationBar{
-    UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettings:)];          
-    self.navigationItem.leftBarButtonItem = navBtn;
+   // UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettings:)];          
+   // self.navigationItem.leftBarButtonItem = navBtn;
 }
 
 #pragma mark - IBActions
@@ -88,8 +89,9 @@
             cell = [[TrainerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+       // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
         cell.textLabel.numberOfLines = 0;
@@ -152,6 +154,12 @@
         
         Workouts_VC *vc = [[Workouts_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if(indexPath.section==1){
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+        
+        YourGoals_VC *vc = [[YourGoals_VC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES]; 
     }
 }
 

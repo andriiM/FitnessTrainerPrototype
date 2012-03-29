@@ -2,8 +2,8 @@
 //  Log_VC.m
 //  FitnessTrainer
 //
-//  Created by _ andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 28.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Log_VC.h"
@@ -91,11 +91,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if(indexPath.section!=2){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
-        alert.tag = 10;
-        [alert show];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"I have Done" message:@"   " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        UITextField *myTextField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
+        [myTextField setBorderStyle:UITextBorderStyleRoundedRect];
+        [myTextField setBackgroundColor:[UIColor whiteColor]];
+        [myTextField setKeyboardType:UIKeyboardTypeNumberPad];
+        [myAlertView addSubview:myTextField];
+        [myTextField becomeFirstResponder];
+      //  CGAffineTransform myTransform = CGAffineTransformMakeTranslation(0.0, 130.0);
+      //  [myAlertView setTransform:myTransform];
+        [myAlertView show];
     }
 }
 

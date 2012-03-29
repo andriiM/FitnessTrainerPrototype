@@ -2,8 +2,8 @@
 //  Home_VC.m
 //  Trainer
 //
-//  Created by   andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 27.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "Home_VC.h"
@@ -33,9 +33,22 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(IBAction)onAll:(id)sender{
+    isAll = TRUE;
+    [table reloadData];
+}
+
+-(IBAction)onSheduled:(id)sender{
+    isAll = FALSE;
+    [table reloadData];   
+}
+
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if(isAll)
+        return @"";
+    
     if(section==1)
         return @"Tomorrow";
     return @"Today";

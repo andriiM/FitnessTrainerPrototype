@@ -2,8 +2,8 @@
 //  FitnessTrainerAppDelegate.h
 //  FitnessTrainer
 //
-//  Created by _ andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 27.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

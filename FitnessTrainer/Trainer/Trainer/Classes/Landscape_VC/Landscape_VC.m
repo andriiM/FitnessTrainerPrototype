@@ -2,8 +2,8 @@
 //  Landscape_VC.m
 //  Trainer
 //
-//  Created by   andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 28.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "Landscape_VC.h"
@@ -66,7 +66,7 @@
         cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
     }
     
-    cell.textLabel.text = @"Swhimming";
+    cell.textLabel.text = @"Shimming";
     cell.detailTextLabel.text = @"10 km / 60min";
 
     // Configure the cell...

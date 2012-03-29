@@ -2,8 +2,8 @@
 //  UserDetail_VC.m
 //  Trainer
 //
-//  Created by   andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 28.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "UserDetail_VC.h"
@@ -11,6 +11,8 @@
 #import "Calendar_VC.h"
 #import "Workout_VC.h"
 #import "Landscape_VC.h"
+#import "YourGoals_VC.h"
+#import "Workouts_VC.h"
 
 @implementation UserDetail_VC
 
@@ -105,7 +107,7 @@
         cell.textLabel.text = @"Workout";
     }
     else if(indexPath.section==2){
-        cell.textLabel.text = @"Sheduling";
+        cell.textLabel.text = @"Scheduling";
     }
     else if(indexPath.section==3){
         if(indexPath.row==0){
@@ -133,11 +135,15 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
 
     if(indexPath.section==1){
-        Workout_VC *vc = [[Workout_VC alloc] init];
+        Workouts_VC *vc = [[Workouts_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if(indexPath.section==2){
         Calendar_VC *vc = [[Calendar_VC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        YourGoals_VC *vc = [[YourGoals_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -2,14 +2,16 @@
 //  Calendar_VC.m
 //  Trainer
 //
-//  Created by   andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 28.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "Calendar_VC.h"
 #import "SheduleDetail_VC.h"
 #import "AddWorkout_VC.h"
 #import "Landscape_VC.h"
+#import "Plan_VC.h"
+#import "Training_VC.h"
 
 @implementation Calendar_VC
 
@@ -44,18 +46,62 @@
 #pragma mark - IBActions
 
 -(void)onEdit:(id)sender{
-    
+    if(!table.isEditing){
+        self.navigationItem.rightBarButtonItem.title = @"Done";
+        [table setEditing:YES animated:YES];
+    }
+    else{
+        self.navigationItem.rightBarButtonItem.title = @"Edit";
+        [table setEditing:FALSE animated:YES];
+    }
 }
 
 #pragma mark - Table view data source
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    
+    if(proposedDestinationIndexPath.row==4){
+        return sourceIndexPath;
+    }
+    
+    if( sourceIndexPath.section != proposedDestinationIndexPath.section ){
+        return sourceIndexPath;
+    }
+    else{
+        return proposedDestinationIndexPath;
+    }
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row==4)
+        return UITableViewCellEditingStyleNone;
+    else if(indexPath.section==0)
+        return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row==4)
+        return FALSE;
+   else if(indexPath.section==0)
+        return FALSE;
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==1)
         return @"Sheduled";
     return @"";
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section==0)
@@ -83,7 +129,7 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             cell.textLabel.numberOfLines = 0;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.detailTextLabel.numberOfLines = 0;
         }
 
@@ -101,10 +147,11 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 
     if(indexPath.row==0){
         cell.textLabel.text = @"Session with Richard";
@@ -119,7 +166,7 @@
         cell.detailTextLabel.text = @"";
     }
     else if(indexPath.row==3){
-        cell.textLabel.text = @"Shwimming";
+        cell.textLabel.text = @"Swimming";
         cell.detailTextLabel.text = @"x2";
     }
     else if(indexPath.row==4){
@@ -136,14 +183,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.section==1 && indexPath.row!=4){
+    if(indexPath.section==0){
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-        SheduleDetail_VC *vc = [[SheduleDetail_VC alloc] init];
+        Plan_VC *vc = [[Plan_VC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if(indexPath.section==1 && indexPath.row!=4){
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+        Training_VC *vc = [[Training_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if(indexPath.row==4){
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-        AddWorkout_VC *vc = [[AddWorkout_VC alloc] init];
+        Training_VC *vc = [[Training_VC alloc] init];
+        vc.isAdd = TRUE;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

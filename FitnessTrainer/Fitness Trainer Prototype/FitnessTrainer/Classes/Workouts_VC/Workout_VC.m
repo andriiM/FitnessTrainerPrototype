@@ -2,8 +2,8 @@
 //  Workout_VC.m
 //  Trainer
 //
-//  Created by _ andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 28.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Workout_VC.h"
@@ -95,30 +95,34 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
      
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 210, 150)];
         imgView.tag = 1;
         [cell.contentView addSubview:imgView];
         
-        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(170, 25, 200, 20)];
+        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(220, 25, 200, 20)];
         label_1.font = [UIFont systemFontOfSize:14.0f];
         label_1.textColor = [UIColor grayColor];
         label_1.tag = 2;
+        label_1.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_1];
         
-        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(170, 42, 200, 20)];
+        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(220, 42, 200, 20)];
         label_2.font = [UIFont boldSystemFontOfSize:14.0f];
         label_2.tag = 3;
+        label_2.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_2];
         
-        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(170, 70, 200, 20)];
+        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(220, 70, 200, 20)];
         label_3.font = [UIFont systemFontOfSize:14.0f];
         label_3.textColor = [UIColor grayColor];
         label_3.tag = 4;
+        label_3.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_3];
         
-        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(170, 87, 200, 20)];
+        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(220, 87, 200, 20)];
         label_4.font = [UIFont boldSystemFontOfSize:14.0f];
         label_4.tag = 5;
+        label_4.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_4];
         
         UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, 300, 0)];
@@ -129,7 +133,7 @@
     }
     
     UIImageView *imgView = (UIImageView*)[cell viewWithTag:1];
-    imgView.image = [UIImage imageNamed:@"ava_3.png"];
+    imgView.image = [UIImage imageNamed:@"icon_2.jpg"];
     
     UILabel *label_1 = (UILabel*)[cell viewWithTag:2];
     label_1.text = @"muscules:";

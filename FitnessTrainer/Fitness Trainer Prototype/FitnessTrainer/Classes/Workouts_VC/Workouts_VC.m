@@ -2,8 +2,8 @@
 //  Workouts_VC.m
 //  FitnessTrainer
 //
-//  Created by _ andrii on 27.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by   andrii on 27.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Workouts_VC.h"
@@ -15,7 +15,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self addRightButtonToNavigationBar];
+   // [self addRightButtonToNavigationBar];
     [self setTitle:@"Workouts Calendar"];
 }
 

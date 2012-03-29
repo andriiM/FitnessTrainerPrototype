@@ -2,13 +2,15 @@
 //  SheduleDetail_VC.m
 //  Trainer
 //
-//  Created by   andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 28.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "SheduleDetail_VC.h"
 #import "SheduleDate_VC.h"
 #import "SheduleRepeates_VC.h"
+#import "Calendar_VC.h"
+#import "Training_VC.h"
 
 @implementation SheduleDetail_VC
 
@@ -28,7 +30,12 @@
 #pragma mark - IBActions
 
 -(void)onAdd{
-    [self.navigationController popViewControllerAnimated:YES];
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if([vc isKindOfClass:[Training_VC class]]){
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - date picker
@@ -109,7 +116,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row==2 || indexPath.row==0)
+    if(indexPath.row==1)
         return 60;
     
     NSString *text = @"The sit-up is a strength training exercise commonly performed with the aim of strengthening the hip flexors and abdominal muscles. It begins with lying with the back on the floor, typically with the arms across the chest or hands behind the head and the knees bent in an attempt to reduce stress on the back muscles and spine, and then elevating both the upper and lower vertebrae from the floor until everything superior to the buttocks is not touching the ground. Some argue that situps can be dangerous due to high compressive lumbar load and may be replaced with the crunch in exercise programs.";
@@ -126,68 +133,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(indexPath.row==0){
-        static NSString *CellIdentifier = @"Cell_0";
-        
-        UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            UIButton *sheduleBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            [sheduleBtn setTag:1];
-            [sheduleBtn addTarget:self action:@selector(onShedule) forControlEvents:UIControlEventTouchUpInside];
-            [sheduleBtn setFrame:CGRectMake(10, 10, 300, 45)];
-            
-            UILabel *lbl_1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 45)];
-            lbl_1.tag = 20;
-            lbl_1.backgroundColor = [UIColor clearColor];
-            lbl_1.font = [UIFont boldSystemFontOfSize:15.0f];
-            lbl_1.textColor = cell.detailTextLabel.textColor;
-            lbl_1.backgroundColor = [UIColor clearColor];
-            [sheduleBtn addSubview:lbl_1];
-            
-            UILabel *lbl_2 = [[UILabel alloc] initWithFrame:CGRectMake(170, 0, 100, 45)];
-            lbl_2.tag = 30;
-            lbl_2.backgroundColor = [UIColor clearColor];
-            lbl_2.textAlignment = UITextAlignmentRight;
-            lbl_2.font = [UIFont boldSystemFontOfSize:15.0f];
-            lbl_2.textColor = [UIColor grayColor];
-            lbl_2.backgroundColor = [UIColor clearColor];
-            [sheduleBtn addSubview:lbl_2];
-            
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(280, 16, 10, 14)];
-            imgView.image = [UIImage imageNamed:@"arrow.png"];
-            [sheduleBtn addSubview:imgView];
-            
-            [cell.contentView addSubview:sheduleBtn];
-        }
-        
-        UIButton *btn = (UIButton*)[cell viewWithTag:1];
-        
-        UILabel *lbl_1 = (UILabel*)[btn viewWithTag:20];
-        
-        UILabel *lbl_2 = (UILabel*)[btn viewWithTag:30];
-        
-        if(selected==0){
-            lbl_1.text = @"Repeat";
-            lbl_2.text = @"x2";
-        }
-        else{
-            lbl_1.text = @"Sheduled";
-            lbl_2.text = @"10/04/12"; 
-        }
-        
-        return cell;
-    }
     
-    if(indexPath.row==2){
+    if(indexPath.row==1){
         static NSString *CellIdentifier = @"Cell_1";
         
         UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -220,31 +172,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 210, 150)];
         imgView.tag = 1;
         [cell.contentView addSubview:imgView];
         
-        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(170, 25, 200, 20)];
+        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(220, 25, 200, 20)];
         label_1.font = [UIFont systemFontOfSize:14.0f];
         label_1.textColor = [UIColor grayColor];
         label_1.tag = 2;
         label_1.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_1];
         
-        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(170, 42, 200, 20)];
+        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(220, 42, 200, 20)];
         label_2.font = [UIFont boldSystemFontOfSize:14.0f];
         label_2.tag = 3;
         label_2.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_2];
         
-        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(170, 70, 200, 20)];
+        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(220, 70, 200, 20)];
         label_3.font = [UIFont systemFontOfSize:14.0f];
         label_3.textColor = [UIColor grayColor];
         label_3.tag = 4;
         label_3.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_3];
         
-        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(170, 87, 200, 20)];
+        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(220, 87, 200, 20)];
         label_4.font = [UIFont boldSystemFontOfSize:14.0f];
         label_4.tag = 5;
         label_4.backgroundColor = [UIColor clearColor];
@@ -258,7 +210,7 @@
     }
     
     UIImageView *imgView = (UIImageView*)[cell viewWithTag:1];
-    imgView.image = [UIImage imageNamed:@"ava_3.png"];
+    imgView.image = [UIImage imageNamed:@"icon_2.jpg"];
     
     UILabel *label_1 = (UILabel*)[cell viewWithTag:2];
     label_1.text = @"muscules:";

@@ -2,8 +2,8 @@
 //  SheduleDate_VC.m
 //  Trainer
 //
-//  Created by   andrii on 28.03.12.
-//  Copyright (c) 2012 lime apps. All rights reserved.
+//  Created by andrii on 28.03.12.
+//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
 //
 
 #import "SheduleDate_VC.h"
