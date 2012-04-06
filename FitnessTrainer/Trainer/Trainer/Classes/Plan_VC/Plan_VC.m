@@ -2,8 +2,8 @@
 //  Plan_VC.m
 //  Trainer
 //
-//  Created by andrii   on 29.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Created by andrii on 29.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Plan_VC.h"

@@ -3,11 +3,11 @@
 //  FitnessTrainer
 //
 //  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Workouts_VC.h"
-#import "Training_VC.h"
+#import "Training_Shedule_VC.h"
 
 @implementation Workouts_VC
 
@@ -47,6 +47,8 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section==0 && indexPath.row==0)
+        return 60;
     return 50;
 }
 
@@ -73,31 +75,37 @@
 
     }
     
+    //
     
     if(indexPath.section==0){
         if(indexPath.row==0){
             cell.textLabel.text = @"Session with Richard";
             cell.detailTextLabel.text = @"today";
+            cell.imageView.image = [UIImage imageNamed:@"fitness ava_2.png"];
         }
         else if(indexPath.row==1){
-            cell.textLabel.text = @"Military Press";
+            cell.textLabel.text = @"Gym Chest";
             cell.detailTextLabel.text = @"tomorrow";
+            cell.imageView.image = [UIImage imageNamed:@"Gym Chest"];
         }
         else if(indexPath.row==2){
-            cell.textLabel.text = @"Swimming";
-            cell.detailTextLabel.text = @"x2";
+            cell.textLabel.text = @"Running, Long Run";
+            cell.imageView.image = [UIImage imageNamed:@"running.png"];
         }
     }
     else if(indexPath.section==1){
         if(indexPath.row==0){
-            cell.textLabel.text = @"Running";
+            cell.textLabel.text = @"Gym Lower Body";
+            cell.imageView.image = [UIImage imageNamed:@"Gym Lower Body"];
         }
         else if(indexPath.row==1){
-            cell.textLabel.text = @"Interval Training";
+            cell.textLabel.text = @"Tennis, Singles";
+            cell.imageView.image = [UIImage imageNamed:@"tennis"];
         }
     }
     else if(indexPath.section==2){
-        cell.textLabel.text = @"Military Press";
+        cell.textLabel.text = @"Basketball";
+        cell.imageView.image = [UIImage imageNamed:@"basketball"];
     }
     
     return cell;
@@ -108,7 +116,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     
-    Training_VC *vc = [[Training_VC alloc] init];
+    Training_Shedule_VC *vc = [[Training_Shedule_VC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

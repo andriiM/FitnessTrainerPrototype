@@ -2,7 +2,7 @@
 //  Home_VC.m
 //  FitnessTrainer
 //
-//  Created by   andrii on 27.03.12.
+//  Created by andrii on 27.03.12.
 //  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
@@ -38,9 +38,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if(section==0){
-        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
-        UIImageView *banner = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 47)];
-        banner.image = [UIImage imageNamed:@"fitness banner.jpg"];
+        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+        UIImageView *banner = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 83)];
+
+        banner.image = [UIImage imageNamed:@"Fitness-Trainer-Header.jpg"];
         [sectionView addSubview:banner];
         return sectionView; 
     }
@@ -56,7 +57,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if(section==0)
-        return 60;
+        return 88;
     
     return 25;
 }
@@ -95,7 +96,7 @@
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = @"Kavin, please don't forget keep shwimming\n\nSee you tomorrow at 3 pm";
+        cell.textLabel.text = @"Kevin, please don't forget keep swimming\n\nSee you tomorrow at 3 pm";
         
         cell.imageView.image = [UIImage imageNamed:@"fitness ava.png.png"];
         

@@ -2,7 +2,7 @@
 //  Training_VC.m
 //  FitnessTrainer
 //
-//  Created by   andrii on 27.03.12.
+//  Created by andrii on 27.03.12.
 //  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Strenght Training"];
+    [self setTitle:@"Gym Lower Body"];
     [self addRightButtonToNavigationBar];
 }
 
@@ -86,7 +86,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section==1)
         return 1;
-    return 3;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -119,13 +119,32 @@
     }
     
     if(indexPath.row==0){
-        cell.textLabel.text = @"Upright Row";
+        cell.textLabel.text = @"Frog Hops";
+        cell.imageView.image = [UIImage imageNamed:@"Frog Hops"];
     }
     else if(indexPath.row==1){
-        cell.textLabel.text = @"Military Press";
+        cell.textLabel.text = @"Leg Press";
+        cell.imageView.image = [UIImage imageNamed:@"Leg Press"];
     }
     else if(indexPath.row==2){
-        cell.textLabel.text = @"Sit-Ups";
+        cell.textLabel.text = @"Barbell Squat";
+        cell.imageView.image = [UIImage imageNamed:@"Barbell Squat"];
+    }
+    else if(indexPath.row==3){
+        cell.textLabel.text = @"One Arm Kettlebell Clean";//n
+        cell.imageView.image = [UIImage imageNamed:@"One Arm Kettebell Clean"];
+    }
+    else if(indexPath.row==4){
+        cell.textLabel.text = @"Deadlift";
+        cell.imageView.image = [UIImage imageNamed:@"Deadlift"];
+    }
+    else if(indexPath.row==5){
+        cell.textLabel.text = @"Lying Leg Curls";
+        cell.imageView.image = [UIImage imageNamed:@"Lying Leg Curls"];
+    }
+    else if(indexPath.row==6){
+        cell.textLabel.text = @"One-Legged Cable Kickback";
+        cell.imageView.image = [UIImage imageNamed:@"One-Legged Cable Kickback"];
     }
 
     return cell;

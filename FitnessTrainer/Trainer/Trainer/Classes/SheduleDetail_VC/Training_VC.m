@@ -2,8 +2,8 @@
 //  Training_VC.m
 //  Trainer
 //
-//  Created by andrii   on 29.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Created by andrii on 29.03.12.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Training_VC.h"
@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Strenght Training"];
+    [self setTitle:@"Gym Lower Body"];
     
     if(isAdd){
         UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(onAdd)];          
@@ -41,12 +41,12 @@
     if(!table.isEditing){
         self.navigationItem.rightBarButtonItem.title = @"Done";
         [table setEditing:YES animated:YES];
-        [table insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [table insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:7 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     }
     else{
         self.navigationItem.rightBarButtonItem.title = @"Edit";
         [table setEditing:FALSE animated:YES];
-        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:7 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -138,7 +138,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
     
-    if(proposedDestinationIndexPath.row==4 || proposedDestinationIndexPath.row==0){
+    if(proposedDestinationIndexPath.row==7 || proposedDestinationIndexPath.row==0){
         return sourceIndexPath;
     }
     
@@ -161,21 +161,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row==0)
         return UITableViewCellEditingStyleNone;
-    else if(indexPath.row==4)
+    else if(indexPath.row==7)
         return UITableViewCellEditingStyleInsert;
 
     return UITableViewCellEditingStyleDelete;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row==0 || indexPath.row==4)
+    if(indexPath.row==0 || indexPath.row==7)
         return FALSE;
     return YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    if(indexPath.row==0)
-        return 60;
+        return 64;
     
     return 50;
 }
@@ -186,8 +186,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(tableView.isEditing)
-        return 5;
-    return 4;
+        return 8;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -260,21 +260,39 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    cell.textLabel.text = @"Sit-Ups";
-    cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
 
-    if(indexPath.row==2){
-        cell.textLabel.text = @"Milirary Press";
+    
+    if(indexPath.row==0){
+        cell.textLabel.text = @"Frog Hops";
+        cell.imageView.image = [UIImage imageNamed:@"Frog Hops"];
+    }
+    else if(indexPath.row==1){
+        cell.textLabel.text = @"Leg Press";
+        cell.imageView.image = [UIImage imageNamed:@"Leg Press"];
+    }
+    else if(indexPath.row==2){
+        cell.textLabel.text = @"Barbell Squat";
+        cell.imageView.image = [UIImage imageNamed:@"Barbell Squat"];
     }
     else if(indexPath.row==3){
-        cell.textLabel.text = @"Upright Row";
+        cell.textLabel.text = @"One Arm Kettlebell Clean";//n
+        cell.imageView.image = [UIImage imageNamed:@"One Arm Kettebell Clean"];
     }
     else if(indexPath.row==4){
-        cell.textLabel.text = @"Add exercise"; 
-        cell.imageView.image = nil;
+        cell.textLabel.text = @"Deadlift";
+        cell.imageView.image = [UIImage imageNamed:@"Deadlift"];
     }
-    
-    
+    else if(indexPath.row==5){
+        cell.textLabel.text = @"Lying Leg Curls";
+        cell.imageView.image = [UIImage imageNamed:@"Lying Leg Curls"];
+    }
+    else if(indexPath.row==6){
+        cell.textLabel.text = @"One-Legged Cable Kickback";
+        cell.imageView.image = [UIImage imageNamed:@"One-Legged Cable Kickback"];
+    }
+    else{
+        cell.textLabel.text = @"Add";
+    }
     return cell;
 }
 

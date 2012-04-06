@@ -2,7 +2,7 @@
 //  Workouts_VC.m
 //  FitnessTrainer
 //
-//  Created by   andrii on 27.03.12.
+//  Created by andrii on 27.03.12.
 //  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
@@ -47,6 +47,8 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section==0 && indexPath.row==0)
+        return 60;
     return 50;
 }
 
@@ -78,26 +80,32 @@
         if(indexPath.row==0){
             cell.textLabel.text = @"Session with Richard";
             cell.detailTextLabel.text = @"today";
+            cell.imageView.image = [UIImage imageNamed:@"fitness ava_2.png"];
         }
         else if(indexPath.row==1){
-            cell.textLabel.text = @"Military Press";
+            cell.textLabel.text = @"Gym Chest";
             cell.detailTextLabel.text = @"tomorrow";
+            cell.imageView.image = [UIImage imageNamed:@"Gym Chest"];
         }
         else if(indexPath.row==2){
-            cell.textLabel.text = @"Swimming";
+            cell.textLabel.text = @"Running, Long Run";
             cell.detailTextLabel.text = @"x2";
+            cell.imageView.image = [UIImage imageNamed:@"running"];
         }
     }
     else if(indexPath.section==1){
         if(indexPath.row==0){
-            cell.textLabel.text = @"Running";
+            cell.textLabel.text = @"Gym Lower Body";
+            cell.imageView.image = [UIImage imageNamed:@"Gym Lower Body"];
         }
         else if(indexPath.row==1){
-            cell.textLabel.text = @"Interval Training";
+            cell.textLabel.text = @"Tennis, Singles";
+            cell.imageView.image = [UIImage imageNamed:@"tennis"];
         }
     }
     else if(indexPath.section==2){
-        cell.textLabel.text = @"Military Press";
+        cell.textLabel.text = @"Basketball";
+        cell.imageView.image = [UIImage imageNamed:@"basketball"];
     }
     
     return cell;

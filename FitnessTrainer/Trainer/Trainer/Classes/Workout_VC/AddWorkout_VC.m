@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "AddWorkout_VC.h"
@@ -14,7 +14,8 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Search"];
+    [self setTitle:@"Search"];   
+    array = [NSArray arrayWithObjects:@"Frog Hops",@"Leg Press",@"Barbell Squat",@"One Arm Kettebell Clean",@"Hurdle Hops",@"Deadlift",@"Lying Leg Curls",@" One-Legged Cable Kickback",@" Dynamic Chest Stretch",@" Barbell Bench Press",@" Barbell Incline Bench Press",@"Pusups",@"Decline Dumbell Press",nil];
 }
 
 #pragma mark - IBActions
@@ -25,13 +26,13 @@
 
 #pragma mark - Table view data source
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return headerView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    return headerView;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 50;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
@@ -42,7 +43,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -53,19 +54,12 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    
 
-    if(indexPath.row==0){
-        cell.textLabel.text = @"Running";
-    }
-    else if(indexPath.row==1){
-        cell.textLabel.text = @"TreadMill";
-    }
-    else if(indexPath.row==2){
-        cell.textLabel.text = @"Rowing Machine";
-    }
+    cell.textLabel.text = [array objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:cell.textLabel.text];
     
     return cell;
 }

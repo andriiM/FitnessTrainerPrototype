@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "SheduleDetail_VC.h"
@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Sit-ups"];
+    [self setTitle:@"Barbell Squat"];
     
     if(self.isAdd){
         UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAdd)];          
@@ -119,7 +119,8 @@
     if(indexPath.row==1)
         return 60;
     
-    NSString *text = @"The sit-up is a strength training exercise commonly performed with the aim of strengthening the hip flexors and abdominal muscles. It begins with lying with the back on the floor, typically with the arms across the chest or hands behind the head and the knees bent in an attempt to reduce stress on the back muscles and spine, and then elevating both the upper and lower vertebrae from the floor until everything superior to the buttocks is not touching the ground. Some argue that situps can be dangerous due to high compressive lumbar load and may be replaced with the crunch in exercise programs.";
+    NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
+
     
     CGSize constraint = CGSizeMake(300, 20000.0f);
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:16.0f] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
@@ -172,31 +173,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 210, 150)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 140, 140)];
         imgView.tag = 1;
         [cell.contentView addSubview:imgView];
         
-        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(220, 25, 200, 20)];
+        UILabel *label_1 = [[UILabel alloc] initWithFrame:CGRectMake(160, 25, 200, 20)];
         label_1.font = [UIFont systemFontOfSize:14.0f];
         label_1.textColor = [UIColor grayColor];
         label_1.tag = 2;
         label_1.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_1];
         
-        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(220, 42, 200, 20)];
+        UILabel *label_2 = [[UILabel alloc] initWithFrame:CGRectMake(160, 42, 200, 20)];
         label_2.font = [UIFont boldSystemFontOfSize:14.0f];
         label_2.tag = 3;
         label_2.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_2];
         
-        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(220, 70, 200, 20)];
+        UILabel *label_3 = [[UILabel alloc] initWithFrame:CGRectMake(160, 70, 200, 20)];
         label_3.font = [UIFont systemFontOfSize:14.0f];
         label_3.textColor = [UIColor grayColor];
         label_3.tag = 4;
         label_3.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:label_3];
         
-        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(220, 87, 200, 20)];
+        UILabel *label_4 = [[UILabel alloc] initWithFrame:CGRectMake(160, 87, 200, 20)];
         label_4.font = [UIFont boldSystemFontOfSize:14.0f];
         label_4.tag = 5;
         label_4.backgroundColor = [UIColor clearColor];
@@ -210,21 +211,21 @@
     }
     
     UIImageView *imgView = (UIImageView*)[cell viewWithTag:1];
-    imgView.image = [UIImage imageNamed:@"icon_2.jpg"];
+    imgView.image = [UIImage imageNamed:@"31_2.jpg"];
     
     UILabel *label_1 = (UILabel*)[cell viewWithTag:2];
     label_1.text = @"muscules:";
     
     UILabel *label_2 = (UILabel*)[cell viewWithTag:3];
-    label_2.text = @"Abdominal";
+    label_2.text = @"Quadriceps";
     
     UILabel *label_3 = (UILabel*)[cell viewWithTag:4];
     label_3.text = @"family:";
     
     UILabel *label_4 = (UILabel*)[cell viewWithTag:5];
-    label_4.text = @"Core Strenght";
+    label_4.text = @"Strenght";
     
-    NSString *text = @"The sit-up is a strength training exercise commonly performed with the aim of strengthening the hip flexors and abdominal muscles. It begins with lying with the back on the floor, typically with the arms across the chest or hands behind the head and the knees bent in an attempt to reduce stress on the back muscles and spine, and then elevating both the upper and lower vertebrae from the floor until everything superior to the buttocks is not touching the ground. Some argue that situps can be dangerous due to high compressive lumbar load and may be replaced with the crunch in exercise programs.";
+    NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     
     UILabel *label_5 = (UILabel*)[cell viewWithTag:6];
     label_5.text = text;

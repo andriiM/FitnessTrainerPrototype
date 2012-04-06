@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "Landscape_VC.h"
@@ -19,7 +19,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation); 
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,7 +66,7 @@
         cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
     }
     
-    cell.textLabel.text = @"Shimming";
+    cell.textLabel.text = @"Swimming";
     cell.detailTextLabel.text = @"10 km / 60min";
 
     // Configure the cell...

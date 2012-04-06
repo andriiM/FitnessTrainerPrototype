@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 __limeappsCompanyName__. All rights reserved.
+//  Copyright (c) 2012 limeapps. All rights reserved.
 //
 
 #import "UserDetail_VC.h"
@@ -21,30 +21,39 @@
     [super viewDidLoad];
     [self setTitle:@"Your trainees"];
     
-    DetailHeader *sectionView = [[DetailHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];  
+    DetailHeader *sectionView = [[DetailHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 100)]; 
     table.tableHeaderView.frame = CGRectMake(0, 0, 320, 100);
     table.tableHeaderView = sectionView;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(orientationChanged:)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(orientationChanged:)
+//                                                 name:UIDeviceOrientationDidChangeNotification
+//                                               object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+ //   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 -(void)orientationChanged:(id)result{
-    Landscape_VC *vc = [[Landscape_VC alloc] init];
-    [self presentModalViewController:vc animated:FALSE];
+    if([[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationLandscapeRight || [[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationLandscapeLeft){
+    }
+
+}
+
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        Landscape_VC *vc = [[Landscape_VC alloc] init];
+        [self presentModalViewController:vc animated:FALSE];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return FALSE;
+    return YES;
 }
 
 
