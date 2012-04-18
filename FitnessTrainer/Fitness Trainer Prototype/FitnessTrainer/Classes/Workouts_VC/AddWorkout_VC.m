@@ -2,8 +2,8 @@
 //  AddWorkout_VC.m
 //  Trainer
 //
-//  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 28.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "AddWorkout_VC.h"
@@ -16,7 +16,7 @@
     [super viewDidLoad];
     [self setTitle:@"Search"];
     
-        array = [NSArray arrayWithObjects:@"Frog Hops",@"Leg Press",@"Barbell Squat",@"One Arm Kettebell Clean",@"Hurdle Hops",@"Deadlift",@"Lying Leg Curls",@" One-Legged Cable Kickback",@" Dynamic Chest Stretch",@" Barbell Bench Press",@" Barbell Incline Bench Press",@"Pusups",@"Decline Dumbell Press",nil];
+        array = [NSArray arrayWithObjects:@"Frog Hops",@"Leg Press",@"Barbell Squat",@"One Arm Kettebell Clean",@"Hurdle Hops",@"Deadlift",@"Lying Leg Curls", nil];
 }
 
 #pragma mark - IBActions
@@ -27,13 +27,13 @@
 
 #pragma mark - Table view data source
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    return headerView;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 50;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 50;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;

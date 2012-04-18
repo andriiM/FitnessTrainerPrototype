@@ -3,7 +3,7 @@
 //  FitnessTrainer
 //
 //  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Training_Shedule_VC.h"
@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Strenght Training"];
+    [self setTitle:@"Strength Training"];
     [self addRightButtonToNavigationBar];
 }
 

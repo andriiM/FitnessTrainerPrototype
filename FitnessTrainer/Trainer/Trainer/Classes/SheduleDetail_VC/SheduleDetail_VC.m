@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "SheduleDetail_VC.h"
@@ -11,6 +11,7 @@
 #import "SheduleRepeates_VC.h"
 #import "Calendar_VC.h"
 #import "Training_VC.h"
+#import "Log_VC.h"
 
 @implementation SheduleDetail_VC
 
@@ -24,14 +25,28 @@
         UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAdd)];          
         self.navigationItem.rightBarButtonItem = navBtn;
     }
+    else{
+       // UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Log" style:UIBarButtonItemStylePlain target:self action:@selector(onLog)];          
+       // self.navigationItem.rightBarButtonItem = navBtn;
+    }
 }
 
 
 #pragma mark - IBActions
 
+-(void)onLog{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    Log_VC *vc = [[Log_VC alloc] initWithNibName:@"Log_VC" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 -(void)onAdd{
     for (UIViewController *vc in self.navigationController.viewControllers) {
         if([vc isKindOfClass:[Training_VC class]]){
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+        else  if([vc isKindOfClass:[Calendar_VC class]]){
             [self.navigationController popToViewController:vc animated:YES];
             break;
         }
@@ -223,7 +238,7 @@
     label_3.text = @"family:";
     
     UILabel *label_4 = (UILabel*)[cell viewWithTag:5];
-    label_4.text = @"Strenght";
+    label_4.text = @"Strength";;
     
     NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     

@@ -2,14 +2,16 @@
 //  Training_VC.m
 //  FitnessTrainer
 //
-//  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 27.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Training_VC.h"
 #import "TrainingDetail_VC.h"
 #import "Workout_VC.h"
 #import "AddWorkout_VC.h"
+#import "Landscape_VC.h"
+#import "Log_VC.h"
 
 @implementation Training_VC
 
@@ -24,6 +26,18 @@
 -(void)addRightButtonToNavigationBar{
     UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(onEdit:)];          
     self.navigationItem.rightBarButtonItem = navBtn;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        Landscape_VC *vc = [[Landscape_VC alloc] init];
+        vc.isHistory = TRUE;
+        [self presentModalViewController:vc animated:FALSE];
+    }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return YES;
 }
 
 #pragma mark - IBActions
@@ -159,7 +173,7 @@
 
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     
-    Workout_VC *vc = [[Workout_VC alloc] init];
+    Log_VC *vc = [[Log_VC alloc] initWithNibName:@"Log_VC" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

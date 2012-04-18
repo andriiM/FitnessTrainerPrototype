@@ -3,17 +3,19 @@
 //  Trainer
 //
 //  Created by andrii on 29.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Training_VC.h"
 #import "SheduleRepeates_VC.h"
 #import "SheduleDetail_VC.h"
 #import "AddWorkout_VC.h"
+#import "Log_VC.h"
+#import "Calendar_VC.h"
 
 @implementation Training_VC
 
-@synthesize isAdd;
+@synthesize isAdd,isHide;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -28,12 +30,26 @@
         self.navigationItem.rightBarButtonItem = navBtn;
     }
 
+    
+    if(isHide){
+        table.frame = CGRectMake(0, 0, 320, 460);
+        [toolBar removeFromSuperview];
+    }
 }
 
 
 #pragma mark - IBActions
 
 -(void)onAdd{
+    NSArray *vc = [self.navigationController viewControllers];
+    
+    for (int i=0; i<vc.count; i++) {
+        if([[vc objectAtIndex:i] isKindOfClass:[Calendar_VC class]]){
+            [self.navigationController popToViewController:[vc objectAtIndex:i] animated:YES];
+            return;
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -174,6 +190,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(isHide && indexPath.row==0)
+        return 0;
+    
    if(indexPath.row==0)
         return 64;
     
@@ -200,6 +219,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if(isHide)
+                return cell;
             
             UIButton *sheduleBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             [sheduleBtn setTag:1];
@@ -241,7 +263,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
             lbl_2.text = @"x2";
         }
         else{
-            lbl_1.text = @"Sheduled";
+            lbl_1.text = @"Scheduled";
             lbl_2.text = @"10/04/12"; 
         }
         
@@ -300,8 +322,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    SheduleDetail_VC *vc = [[SheduleDetail_VC alloc] init];
-    vc.isAdd = FALSE;
+    Log_VC *vc = [[Log_VC alloc] initWithNibName:@"Log_VC" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

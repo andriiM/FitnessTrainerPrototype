@@ -2,8 +2,8 @@
 //  SheduleDetail_VC.m
 //  Trainer
 //
-//  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 28.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "SheduleDetail_VC.h"
@@ -169,7 +169,7 @@
     label_3.text = @"family:";
     
     UILabel *label_4 = (UILabel*)[cell viewWithTag:5];
-    label_4.text = @"Strenght";
+    label_4.text = @"Strength";
     
     NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     

@@ -3,11 +3,12 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Workout_VC.h"
 #import "TrainingDetail_VC.h"
+#import "Log_VC.h"
 
 @implementation Workout_VC
 
@@ -17,7 +18,14 @@
 }
 
 
+
 #pragma mark - IBActions
+
+-(void)onLog{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    Log_VC *vc = [[Log_VC alloc] initWithNibName:@"Log_VC" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)onAlterante{
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -139,7 +147,7 @@
     label_3.text = @"family:";
     
     UILabel *label_4 = (UILabel*)[cell viewWithTag:5];
-    label_4.text = @"Strenght";
+    label_4.text = @"Strength";;
     
     NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     

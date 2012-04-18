@@ -2,8 +2,8 @@
 //  Workout_VC.m
 //  Trainer
 //
-//  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 28.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Workout_VC.h"
@@ -16,8 +16,8 @@
     [super viewDidLoad];
     [self setTitle:@"Barbell Squat"];
     
-    UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Log" style:UIBarButtonItemStylePlain target:self action:@selector(onLog)];          
-    self.navigationItem.rightBarButtonItem = navBtn;
+//    UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Log" style:UIBarButtonItemStylePlain target:self action:@selector(onLog)];          
+  //  self.navigationItem.rightBarButtonItem = navBtn;
 }
 
 
@@ -25,7 +25,7 @@
 
 -(void)onLog{
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    Log_VC *vc = [[Log_VC alloc] init];
+    Log_VC *vc = [[Log_VC alloc] initWithNibName:@"Log_VC" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -150,7 +150,7 @@
     label_3.text = @"family:";
     
     UILabel *label_4 = (UILabel*)[cell viewWithTag:5];
-    label_4.text = @"Strenght";
+    label_4.text = @"Strength";
     
     NSString *text = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"1" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
     

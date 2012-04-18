@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 29.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "YourGoals_VC.h"
@@ -24,8 +24,8 @@
     NSMutableArray *current = [NSMutableArray array];
     
     NSMutableDictionary *dct_1 = [NSMutableDictionary dictionary];
-    [dct_1 setValue:@"Strenght" forKey:@"name"];
-    [dct_1 setValue:@"bench press 255" forKey:@"detail"];
+    [dct_1 setValue:@"Strength" forKey:@"name"];
+    [dct_1 setValue:@"Bench Press 255" forKey:@"detail"];
     
     NSMutableDictionary *dct_2 = [NSMutableDictionary dictionary];
     [dct_2 setValue:@"Weight" forKey:@"name"];
@@ -39,7 +39,7 @@
     
     NSMutableDictionary *dct_3 = [NSMutableDictionary dictionary];
     [dct_3 setValue:@"Weight" forKey:@"name"];
-    [dct_3 setValue:@"reduce weight to 88 kg" forKey:@"detail"];
+    [dct_3 setValue:@"reduce BMI below 25" forKey:@"detail"];
     
     [past addObject:dct_3];
     
@@ -62,7 +62,7 @@
     }
     else{
         int row = [[goals objectForKey:@"current"] count];
-
+        
         self.navigationItem.rightBarButtonItem.title = @"Edit";
         [self.tableView setEditing:FALSE animated:YES];
         
@@ -74,7 +74,7 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {
-
+    
     if(proposedDestinationIndexPath.row>=[[goals objectForKey:@"current"] count] && proposedDestinationIndexPath.section==0){
         return sourceIndexPath;
     }
@@ -139,8 +139,6 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            
-            
             cell.textLabel.text = @"Add New Goal";
         }
         
@@ -153,7 +151,6 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.detailTextLabel.backgroundColor = [UIColor clearColor];
             
             UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 33, 33)];
@@ -167,12 +164,12 @@
             lbl.font = [UIFont boldSystemFontOfSize:17.0f];
             lbl.backgroundColor = [UIColor clearColor];
             [cell.contentView addSubview:lbl];
-    
+            
         }
         
         UIButton *btn = (UIButton*)[cell.contentView.subviews objectAtIndex:0];
         btn.tag = indexPath.row;
-
+        
         UILabel *lbl = (UILabel*)[cell.contentView viewWithTag:900];
         
         if(indexPath.row<[[goals objectForKey:@"current"] count]){
@@ -183,8 +180,8 @@
             cell.textLabel.text = @"Add New Goal";
             [btn removeFromSuperview];
         }
-
-
+        
+        
         return cell;  
     }
     
@@ -193,9 +190,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-
+        
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 33, 33)];
         [btn addTarget:self action:@selector(moveToCurrent:) forControlEvents:UIControlEventTouchUpInside];
         [btn setBackgroundImage:[UIImage imageNamed:@"checkbox_1.png"] forState:UIControlStateNormal];
@@ -219,7 +215,7 @@
     
     lbl.text = [[[goals objectForKey:@"past"] objectAtIndex:indexPath.row] valueForKey:@"name"];
     cell.detailTextLabel.text = [[[goals objectForKey:@"past"] objectAtIndex:indexPath.row] valueForKey:@"detail"];
-
+    
     return cell;
 }
 
@@ -242,14 +238,14 @@
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:path.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
-
+    
     if([[goals objectForKey:@"past"] count]!=0){
         [[goals objectForKey:@"past"] insertObject:dct atIndex:0];
     }
     else{
         [[goals objectForKey:@"past"] addObject:dct];
     }
-
+    
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
@@ -260,7 +256,7 @@
         return;
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:sender.tag inSection:1];
-
+    
     NSMutableDictionary *dct = [NSMutableDictionary dictionaryWithDictionary:[[goals objectForKey:@"past"] objectAtIndex:path.row]];
     [[goals objectForKey:@"past"] removeObjectAtIndex:path.row];
     

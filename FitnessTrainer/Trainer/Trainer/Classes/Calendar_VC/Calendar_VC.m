@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Calendar_VC.h"
@@ -111,7 +111,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==1)
-        return @"Sheduled";
+        return @"Scheduled";
     return @"";
 }
 
@@ -204,6 +204,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if(indexPath.section==0){
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
         Plan_VC *vc = [[Plan_VC alloc] init];
@@ -218,8 +219,8 @@
     }
     else if(indexPath.row==5){
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-        Training_VC *vc = [[Training_VC alloc] init];
-        vc.isAdd = TRUE;
+        AddWorkout_VC *vc = [[AddWorkout_VC alloc] initWithNibName:@"AddWorkout_VC" bundle:nil];
+        vc.isHide = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Home_VC.h"
@@ -16,6 +16,14 @@
     [super viewDidLoad];
     [self addLeftButtonToNavigationBar];
     [self setTitle:@"Your trainees"];
+    
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+    UIImageView *banner = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 83)];
+    
+    banner.image = [UIImage imageNamed:@"Fitness-Trainer-Header.jpg"];
+    [sectionView addSubview:banner];
+    
+    table.tableHeaderView = sectionView;
 }
 
 

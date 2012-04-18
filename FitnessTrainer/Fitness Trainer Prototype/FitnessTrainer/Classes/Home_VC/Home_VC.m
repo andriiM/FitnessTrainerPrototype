@@ -2,8 +2,8 @@
 //  Home_VC.m
 //  FitnessTrainer
 //
-//  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 27.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Home_VC.h"
@@ -50,8 +50,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==1)
-        return @"3 Goals";
-    
+        return @"2 Goals";
+    else if(section==3)
+        return @"Measurements";
     return @"";
 }
 
@@ -66,16 +67,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section==0)
         return 100;
+    
+    if(indexPath.section==1)
+        return 40;
+    
     return 50;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section==0 || section==2)
         return 1;
+    else if(section==3)
+        return 3;
     return 2;
 }
 
@@ -96,7 +103,7 @@
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = @"Kevin, please don't forget keep swimming\n\nSee you tomorrow at 3 pm";
+        cell.textLabel.text = @"Kevin, please don't forget\n to keep swimming\n\nSee you tomorrow at 3 pm";
         
         cell.imageView.image = [UIImage imageNamed:@"fitness ava.png.png"];
         
@@ -109,19 +116,22 @@
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.backgroundColor = [UIColor whiteColor];
+            if(indexPath.row==0){
+                UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 35, 300, 10)];
+                bg.backgroundColor = [UIColor whiteColor];
+                [cell addSubview:bg];
+            }
         }
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
         if(indexPath.section==1){
             if(indexPath.row==0){
-                cell.textLabel.text = @"Strenght";
-                cell.detailTextLabel.text = @"bench press 255";
+                cell.textLabel.text = @"Strength";
+                cell.detailTextLabel.text = @"Bench Press 100";
             }
             else{
-                cell.imageView.image = [UIImage imageNamed:@"checkmark.png"];
                 cell.textLabel.text = @"Weight";
-                cell.detailTextLabel.text = @"reduce weight to 190";
+                cell.detailTextLabel.text = @"reduce weight to 88 kg";
             }
         }
         
@@ -140,6 +150,33 @@
         cell.textLabel.text = @"Workouts";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
+        
+        return cell;
+    }
+    else if(indexPath.section==3){
+        
+        static NSString *CellIdentifier = @"Cell_section_3";
+        
+        UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        if(indexPath.row==0){
+            cell.textLabel.text = @"Body Measurements";
+            cell.detailTextLabel.text = @"weight";
+        }
+        else if(indexPath.row==1){
+            cell.textLabel.text = @"Cardio Performance";
+            cell.detailTextLabel.text = @"aerobic";
+        }
+        else if(indexPath.row==2){
+            cell.textLabel.text = @"Blood Test";
+            cell.detailTextLabel.text = @"(hormones)";
+        }
+        
         
         return cell;
     }

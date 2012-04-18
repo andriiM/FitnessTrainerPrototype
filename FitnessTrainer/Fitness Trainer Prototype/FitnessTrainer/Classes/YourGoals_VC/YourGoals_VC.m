@@ -2,8 +2,8 @@
 //  YourGoals_VC.m
 //  Trainer
 //
-//  Created by andrii   on 29.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 29.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "YourGoals_VC.h"
@@ -24,8 +24,8 @@
     NSMutableArray *current = [NSMutableArray array];
     
     NSMutableDictionary *dct_1 = [NSMutableDictionary dictionary];
-    [dct_1 setValue:@"Strenght" forKey:@"name"];
-    [dct_1 setValue:@"bench press 255" forKey:@"detail"];
+    [dct_1 setValue:@"Strength" forKey:@"name"];
+    [dct_1 setValue:@"Bench Press 255" forKey:@"detail"];
     
     NSMutableDictionary *dct_2 = [NSMutableDictionary dictionary];
     [dct_2 setValue:@"Weight" forKey:@"name"];
@@ -39,7 +39,7 @@
     
     NSMutableDictionary *dct_3 = [NSMutableDictionary dictionary];
     [dct_3 setValue:@"Weight" forKey:@"name"];
-    [dct_3 setValue:@"reduce weight to 88 kg" forKey:@"detail"];
+    [dct_3 setValue:@"reduce BMI below 25" forKey:@"detail"];
     
     [past addObject:dct_3];
     
@@ -139,8 +139,6 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            
-            
             cell.textLabel.text = @"Add New Goal";
         }
         
@@ -153,7 +151,6 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.detailTextLabel.backgroundColor = [UIColor clearColor];
             
             UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 33, 33)];
@@ -193,7 +190,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 33, 33)];

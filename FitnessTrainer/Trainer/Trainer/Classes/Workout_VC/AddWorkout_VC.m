@@ -3,19 +3,35 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "AddWorkout_VC.h"
 #import "SheduleDetail_VC.h"
-
+#import "Training_VC.h"
 
 @implementation AddWorkout_VC
+
+@synthesize isHide;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setTitle:@"Search"];   
-    array = [NSArray arrayWithObjects:@"Frog Hops",@"Leg Press",@"Barbell Squat",@"One Arm Kettebell Clean",@"Hurdle Hops",@"Deadlift",@"Lying Leg Curls",@" One-Legged Cable Kickback",@" Dynamic Chest Stretch",@" Barbell Bench Press",@" Barbell Incline Bench Press",@"Pusups",@"Decline Dumbell Press",nil];
+    
+
+    
+    if(isHide){
+        [self setTitle:@"Add Workout"];
+        
+        array = [NSArray arrayWithObjects:@"Gym Back Workout", @"Gym Lower Body Workout",@"Gym Core Strength Workout",@"Running, Long Run",@"Running, High Intensity",@"Running, Intervals",@"Tennis, Singles",@"Tennis, Doubles", nil];
+        
+        [sBar removeFromSuperview];
+        table.frame = CGRectMake(0, 0, 320, 460);
+    }
+    else{
+        array = [NSArray arrayWithObjects:@"Frog Hops",@"Leg Press",@"Barbell Squat",@"One Arm Kettebell Clean",@"Hurdle Hops",@"Deadlift",@"Lying Leg Curls", nil];
+    }
+       
 }
 
 #pragma mark - IBActions
@@ -26,13 +42,18 @@
 
 #pragma mark - Table view data source
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    return headerView;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(isHide)
+        return nil;
+    
+    return headerView;
+}
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 50;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(isHide)
+        return 0;
+    return 50;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
@@ -55,11 +76,35 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        if(isHide)
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
     }
     
 
     cell.textLabel.text = [array objectAtIndex:indexPath.row];
     cell.imageView.image = [UIImage imageNamed:cell.textLabel.text];
+
+    NSRange textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Gym"];
+    
+    if(textRange.location != NSNotFound){
+        cell.imageView.image = [UIImage imageNamed:@"Gym Chest.png"]; 
+    }
+    
+    textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Running"];
+    
+    if(textRange.location != NSNotFound){
+        cell.imageView.image = [UIImage imageNamed:@"running.png"]; 
+
+    }
+    
+    textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Tennis"];
+    
+    if(textRange.location != NSNotFound){
+        cell.imageView.image = [UIImage imageNamed:@"tennis.png"]; 
+        
+    }
+    
     
     return cell;
 }
@@ -68,9 +113,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    SheduleDetail_VC *vc = [[SheduleDetail_VC alloc] init];
-    vc.isAdd = TRUE;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if(isHide){
+        Training_VC *vc = [[Training_VC alloc] initWithNibName:@"Training_VC" bundle:nil];
+        vc.isAdd = TRUE;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        SheduleDetail_VC *vc = [[SheduleDetail_VC alloc] init];
+        vc.isAdd = TRUE;
+        [self.navigationController pushViewController:vc animated:YES];  
+    }
+
 }
 
 

@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "UserDetail_VC.h"
@@ -67,14 +67,16 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==0)
-        return @"3 Goals";
+        return @"2 Goals";
     else if(section==3)
-        return @"Measuments";
+        return @"Measurements";
     
     return @"";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section==0)
+        return 40;
     return 50;
 }
 
@@ -100,20 +102,25 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if(indexPath.row==0 && indexPath.section==0){
+            UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 35, 300, 10)];
+            bg.backgroundColor = [UIColor whiteColor];
+            [cell addSubview:bg];
+        }
     }
     
     if(indexPath.section==0){
         if(indexPath.row==0){
-            cell.textLabel.text = @"Strenght";
-            cell.detailTextLabel.text = @"bench press 255";
+            cell.textLabel.text = @"Strength";;
+            cell.detailTextLabel.text = @"Bench Press 100";
         }
-        else if(indexPath.row==1){
+        else{
             cell.textLabel.text = @"Weight";
-            cell.detailTextLabel.text = @"reduce weight to 255";
+            cell.detailTextLabel.text = @"reduce weight to 88 kg";
         }
     }
     else if(indexPath.section==1){
-        cell.textLabel.text = @"Workout";
+        cell.textLabel.text = @"Workouts";
     }
     else if(indexPath.section==2){
         cell.textLabel.text = @"Scheduling";
@@ -141,6 +148,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.section==3)
+        return;
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
 
     if(indexPath.section==1){

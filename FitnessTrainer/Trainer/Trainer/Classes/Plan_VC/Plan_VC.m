@@ -3,7 +3,7 @@
 //  Trainer
 //
 //  Created by andrii on 29.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Plan_VC.h"
@@ -19,7 +19,7 @@
     [super viewDidLoad];
     [self setTitle:@"Plan"];
     
-    string = @"Kevin, please don't forget to keep swhimming";
+    string = @"Kevin, please don't forget to keep swimming";
 }
 
 

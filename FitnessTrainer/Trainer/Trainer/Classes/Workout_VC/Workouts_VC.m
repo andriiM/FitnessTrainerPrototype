@@ -3,11 +3,14 @@
 //  FitnessTrainer
 //
 //  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Workouts_VC.h"
 #import "Training_Shedule_VC.h"
+#import "Training_VC.h"
+#import "Landscape_VC.h"
+#import "Log_VC.h"
 
 @implementation Workouts_VC
 
@@ -17,6 +20,8 @@
     [super viewDidLoad];
    // [self addRightButtonToNavigationBar];
     [self setTitle:@"Workouts Calendar"];
+    
+   array = [NSArray arrayWithObjects:@"Gym Back Workout", @"Gym Lower Body Workout",@"Gym Core Strength Workout",@"Running, Long Run",@"Running, High Intensity",@"Running, Intervals",@"Tennis, Singles",@"Tennis, Doubles",nil];
 }
 
 
@@ -24,6 +29,19 @@
     UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAdd:)];          
     self.navigationItem.rightBarButtonItem = navBtn;
 }
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        Landscape_VC *vc = [[Landscape_VC alloc] init];
+        vc.isHistory = TRUE;
+        [self presentModalViewController:vc animated:FALSE];
+    }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return YES;
+}
+
 
 #pragma mark - IBActions
 
@@ -35,7 +53,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==0)
-        return @"Sheduled";
+        return @"Scheduled";
     else if(section==1)
         return @"Top Workouts";
     else if(section==2)
@@ -61,7 +79,7 @@
         return 3;
     else if(section==1)
         return 2;
-    return 1;
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,7 +90,8 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.imageView.image = [UIImage imageNamed:@"exercise_fitnes.png"];
-
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
+        cell.textLabel.minimumFontSize = 10.0f;
     }
     
     //
@@ -104,8 +123,28 @@
         }
     }
     else if(indexPath.section==2){
-        cell.textLabel.text = @"Basketball";
-        cell.imageView.image = [UIImage imageNamed:@"basketball"];
+        cell.textLabel.text = [array objectAtIndex:indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:cell.textLabel.text];
+        cell.detailTextLabel.text = @"";
+        NSRange textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Gym"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"Gym Chest.png"]; 
+        }
+        
+        textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Running"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"running.png"]; 
+            
+        }
+        
+        textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Tennis"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"tennis.png"]; 
+            
+        }
     }
     
     return cell;
@@ -116,7 +155,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     
-    Training_Shedule_VC *vc = [[Training_Shedule_VC alloc] init];
+    Training_VC *vc = [[Training_VC alloc] initWithNibName:@"Training_VC" bundle:nil];
+    vc.isHide = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

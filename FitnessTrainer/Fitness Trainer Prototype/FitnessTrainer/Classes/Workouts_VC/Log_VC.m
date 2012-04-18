@@ -2,11 +2,12 @@
 //  Log_VC.m
 //  FitnessTrainer
 //
-//  Created by andrii on 28.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 28.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Log_VC.h"
+#import "Workout_VC.h"
 
 @implementation Log_VC
 
@@ -14,16 +15,29 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setTitle:@"Log"];
+    [self setTitle:@"Track"];
+    [self addRightButtonToNavigationBar];
 }
 
 
 -(void)addRightButtonToNavigationBar{
-    UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAdd:)];          
+    UIBarButtonItem *navBtn = [[UIBarButtonItem alloc] initWithTitle:@"Instructions" style:UIBarButtonItemStylePlain target:self action:@selector(onInstructions)];          
     self.navigationItem.rightBarButtonItem = navBtn;
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    if(currentField)
+        [currentField resignFirstResponder];
+}
+
+-(void)onInstructions{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    Workout_VC *vc = [[Workout_VC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - IBActions
+
 
 -(void)onAdd:(id)sender{
     
@@ -43,6 +57,8 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section<2)
+        return 90;
     return 50;
 }
 
@@ -77,11 +93,55 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];    
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        UILabel *lbl_1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
+        lbl_1.backgroundColor = [UIColor clearColor];
+        lbl_1.font = [UIFont boldSystemFontOfSize:18.0f];
+        [cell.contentView addSubview:lbl_1];
+        
+        UITextField *field_1 = [[UITextField alloc] initWithFrame:CGRectMake(10, 37, 80, 40)];
+        field_1.borderStyle = UITextBorderStyleBezel;
+        field_1.delegate = self;
+        field_1.textAlignment = UITextAlignmentCenter;
+        field_1.font = [UIFont boldSystemFontOfSize:25.0f];
+        field_1.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.contentView addSubview:field_1];
+        
+        UILabel *lbl_2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 45, 200, 20)];
+        lbl_2.backgroundColor = [UIColor clearColor];
+        lbl_2.font = [UIFont boldSystemFontOfSize:18.0f];
+        [cell.contentView addSubview:lbl_2];
+        
+        UITextField *field_2 = [[UITextField alloc] initWithFrame:CGRectMake(185, 37, 80, 40)];
+        field_2.borderStyle = UITextBorderStyleBezel;
+        field_2.delegate = self;
+        field_2.textAlignment = UITextAlignmentCenter;
+        field_2.font = [UIFont boldSystemFontOfSize:25.0f];
+        field_2.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.contentView addSubview:field_2];
+        
+        UILabel *lbl_3 = [[UILabel alloc] initWithFrame:CGRectMake(270, 45, 200, 20)];
+        lbl_3.backgroundColor = [UIColor clearColor];
+        lbl_3.font = [UIFont boldSystemFontOfSize:18.0f];
+        [cell.contentView addSubview:lbl_3];
+   
     }
+        
+    UILabel *lbl_1 = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
+    lbl_1.text = @"I have done";
     
-    cell.textLabel.text = @"I have Done";
-    cell.detailTextLabel.text = @"30 push-ups";
+    UITextField *field_1 = (UITextField*)[cell.contentView.subviews objectAtIndex:1];
+    field_1.text = @"10";
+
+    UILabel *lbl_2 = (UILabel*)[cell.contentView.subviews objectAtIndex:2];
+    lbl_2.text = @"reps with";
+    
+    UITextField *field_2 = (UITextField*)[cell.contentView.subviews objectAtIndex:3];
+    field_2.text = @"10";
+    
+    UILabel *lbl_3 = (UILabel*)[cell.contentView.subviews objectAtIndex:4];
+    lbl_3.text = @"kg";
+
     
     return cell;
 }
@@ -89,26 +149,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if(indexPath.section!=2){
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"I have Done" message:@"   " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        UITextField *myTextField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
-        [myTextField setBorderStyle:UITextBorderStyleRoundedRect];
-        [myTextField setBackgroundColor:[UIColor whiteColor]];
-        [myTextField setKeyboardType:UIKeyboardTypeNumberPad];
-        [myAlertView addSubview:myTextField];
-        [myTextField becomeFirstResponder];
-      //  CGAffineTransform myTransform = CGAffineTransformMakeTranslation(0.0, 130.0);
-      //  [myAlertView setTransform:myTransform];
-        [myAlertView show];
+    if(indexPath.section<2){
+        if(currentField){
+            [currentField resignFirstResponder];
+        }
     }
 }
 
 
+#pragma mark - UITextField delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    currentField = textField;
+}
+
 #pragma mark - Memory management
 
 - (void)viewDidUnload{
-    table = nil;
+    currentField = nil;
     [super viewDidUnload];
 }
 

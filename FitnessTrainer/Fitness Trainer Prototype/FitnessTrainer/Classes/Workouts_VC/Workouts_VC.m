@@ -2,8 +2,8 @@
 //  Workouts_VC.m
 //  FitnessTrainer
 //
-//  Created by andrii on 27.03.12.
-//  Copyright (c) 2012 limeapps. All rights reserved.
+//  Created by  andrii on 27.03.12.
+//  Copyright (c) 2012 LimeApps. All rights reserved.
 //
 
 #import "Workouts_VC.h"
@@ -17,6 +17,8 @@
     [super viewDidLoad];
    // [self addRightButtonToNavigationBar];
     [self setTitle:@"Workouts Calendar"];
+    
+       array = [NSArray arrayWithObjects:@"Gym Back Workout", @"Gym Lower Body Workout",@"Gym Core Strength Workout",@"Running, Long Run",@"Running, High Intensity",@"Running, Intervals",@"Tennis, Singles",@"Tennis, Doubles",nil];
 }
 
 
@@ -35,7 +37,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if(section==0)
-        return @"Sheduled";
+        return @"Scheduled";
     else if(section==1)
         return @"Top Workouts";
     else if(section==2)
@@ -61,7 +63,7 @@
         return 3;
     else if(section==1)
         return 2;
-    return 1;
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -104,8 +106,28 @@
         }
     }
     else if(indexPath.section==2){
-        cell.textLabel.text = @"Basketball";
-        cell.imageView.image = [UIImage imageNamed:@"basketball"];
+        cell.textLabel.text = [array objectAtIndex:indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:cell.textLabel.text];
+        cell.detailTextLabel.text = @"";
+        NSRange textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Gym"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"Gym Chest.png"]; 
+        }
+        
+        textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Running"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"running.png"]; 
+            
+        }
+        
+        textRange =[[array objectAtIndex:indexPath.row] rangeOfString:@"Tennis"];
+        
+        if(textRange.location != NSNotFound){
+            cell.imageView.image = [UIImage imageNamed:@"tennis.png"]; 
+            
+        }
     }
     
     return cell;
